@@ -36,5 +36,5 @@
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
-  <%= inspect @conn %>
+  <%= inspect @conn, pretty: true %>
 </html>
