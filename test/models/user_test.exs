@@ -1,5 +1,5 @@
 defmodule Rumbl.UserTest do
-  use Rumbl.ModelCase
+  use Rumbl.ModelCase, async: true
   alias Rumbl.User
 
   @valid_attrs %{name: "A User", username: "eva"}
@@ -17,14 +17,14 @@ defmodule Rumbl.UserTest do
 
   test "changeset does not accept long usernames" do
     attrs = Map.put(@valid_attrs, :username, String.duplicate("a", 30))
-    assert {:username, {"should be at most %{count} character(s)", [count: 20]}} in
+    assert {:username, {"should be at most %{count} character(s)", [count: 20, validation: :length, max: 20]}} in
            errors_on(%User{}, attrs)
   end
 
   test "registration_changeset password must be at least 6 chars long" do
     attrs = Map.put(@valid_attrs, :password, "12345")
     changeset = User.registration_changeset(%User{}, attrs)
-    assert {:password, {"should be at least %{count} character(s)", count: 6}}
+    assert {:password, {"should be at least %{count} character(s)", [count: 6, validation: :length, min: 6]}}
            in changeset.errors
   end
 
