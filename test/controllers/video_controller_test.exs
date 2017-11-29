@@ -23,7 +23,7 @@ defmodule Rumbl.VideoControllerTest do
   end
 
   alias Rumbl.Video
-  @valid_attrs %{url: "http://youtu.be", title: "vid", description: "a vid"}
+  @valid_attrs %{url: "http://youtu.be", title: "vid", description: "a vid", slug: "slug"}
   @invalid_attrs %{title: "invalid"}
 
   defp video_count(query), do: Repo.one(from v in query, select: count(v.id))
@@ -31,7 +31,7 @@ defmodule Rumbl.VideoControllerTest do
   @tag login_as: "max"
   test "creates user video and redirects", %{conn: conn, user: user} do
     conn = post conn, video_path(conn, :create), video: @valid_attrs
-    assert redirected_to(conn) == video_path(conn, :show, Repo.get_by!(Video, @valid_attrs).id)
+    assert redirected_to(conn) == video_path(conn, :show, Repo.get_by!(Video, @valid_attrs).slug)
     assert Repo.get_by!(Video, @valid_attrs).user_id == user.id
   end
 
