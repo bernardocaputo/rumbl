@@ -18,6 +18,10 @@ defmodule Rumbl.VideoController do
       assign(conn, :categories, categories)
   end
 
+# aplica para o module do controller atual (VideoController)
+# para qual que seja a action(index show etc),
+#conn, conn,params e assign o  atual current_user
+
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),
           [conn, conn.params, conn.assigns.current_user])
