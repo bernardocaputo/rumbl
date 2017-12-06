@@ -10,6 +10,10 @@ defmodule Rumbl.Mixfile do
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
+      build_path: "../../_build",
+      config_path: "../../config/config.exs",
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
       deps: deps()
     ]
   end
@@ -20,7 +24,7 @@ defmodule Rumbl.Mixfile do
   def application do
     [
       mod: {Rumbl, []},
-      extra_applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext, :phoenix_ecto, :postgrex, :comeonin]
+      extra_applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext, :phoenix_ecto, :postgrex, :comeonin, :info_sys]
     ]
   end
 
@@ -41,7 +45,7 @@ defmodule Rumbl.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:sweet_xml, "~> 0.5.0"},
+      {:info_sys, in_umbrella: true},
       {:comeonin, "~> 2.0"}
     ]
   end
