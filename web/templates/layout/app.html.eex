@@ -35,5 +35,4 @@
     <script>window.userToken = "<%= assigns[:user_token] %>"</script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
-  <%= inspect @conn, pretty: true %>
 </html>
